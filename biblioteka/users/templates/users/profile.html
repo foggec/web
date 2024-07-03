@@ -1,0 +1,70 @@
+{% extends 'main/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block sim %}
+<div class="content-section">
+  <div class="media">
+    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+    <div class="media-body">
+      <h4 class="account-heading" style="font-weight: bold">{{ user.username }}</h4>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+  <div class="backlog-row">
+    <div class="backlog-game horizontal">
+      <h4>В ПЛАНАХ К ПРОЧТЕНИЮ</h4>
+      <div class="backlog-game-tile horizontal">
+        {% for book in user.profile.want_to_read.all %}
+          <img src="{{ MEDIA_URL }}{{ book.pre }}" alt="{{ book.title }} Cover">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="backlog-row">
+    <div class="backlog-game horizontal">
+      <h4>ЧИТАЮ</h4>
+      <div class="backlog-game-tile horizontal">
+        {% for book in user.profile.reading.all %}
+          <img src="{{ MEDIA_URL }}{{ book.pre }}" alt="{{ book.title }} Cover">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="backlog-row">
+    <div class="backlog-game horizontal">
+      <h4>НЕДОЧИТАНО(БРОШЕНО)</h4>
+      <div class="backlog-game-tile horizontal">
+        {% for book in user.profile.reaed.all %}
+          <img src="{{ MEDIA_URL }}{{ book.pre }}" alt="{{ book.title }} Cover">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="backlog-row">
+    <div class="backlog-game horizontal">
+      <h4>ПРОЧИТАНО</h4>
+      <div class="backlog-game-tile horizontal">
+        {% for book in user.profile.completed.all %}
+          <img src="{{ MEDIA_URL }}{{ book.pre }}" alt="{{ book.title }} Cover">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+  {% if request.user == user %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4" style="color:#3f818c; font-family: courier; font-weight: bold"><em>ВАША СКАЗОЧНАЯ ЛЕТОПИСЬ</em></legend>
+      <h6>{{ u_form|crispy }}</h6>
+      <h6>{{ p_form|crispy }}</h6>
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-success" type="submit" style="background-color:#3eb489">Преобразить летопись пером волшебника</button>
+    </div>
+  </form>
+  {% endif %}
+</div>
+{% endblock sim %}

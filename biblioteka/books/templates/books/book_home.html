@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+{% block title %}книги{% endblock %}
+{% block sim %}
+    <div class="features">
+        <h1 style="margin-left:250px">ПРЕДЛОЖЕННЫЕ КНИГИ</h1>
+        {% if books %}
+
+            <div class="row">
+                {% for val in books %}
+                    <div class="col-md-6">
+                        <div class="alert alert-warning" role="alert">
+                            <h3>{{ val.title }}</h3>
+                            <img class="mg" src="{{ MEDIA_URL }}{{ val.pre }}" alt="Обложка {{ val.title }}"/>
+                            <a href="{% url 'books-detail' val.id %}" class="btn btn-success"><em>Изучить детали, скрытые от глаз неверных</em></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p>Писаний нет</p>
+        {% endif %}
+    </div>
+{% endblock %}

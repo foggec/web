@@ -1,0 +1,21 @@
+{% extends 'main/layout.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block sim %}
+    <div class="features">
+        {% filter upper %}
+            <h1>{{ article.title }}</h1>
+        {% endfilter %}
+        <p>{{ article.avtor }}</p>
+        <p>ЖАНРЫ И ТЕГИ: {{ article.idea }}</p>
+        <div style="display: flex; align-items: start;">
+            <img class="mgd" src="{{ MEDIA_URL }}{{ article.pre }}" style="margin-right: 20px;">
+            <div style="width: 700px">
+                <p class="tx">{{ article.full_t }}</p>
+                <p class="tx">ДАТА ПУБЛИКАЦИИ: {{ article.data }}</p>
+            </div>
+        </div>
+
+
+
+    </div>
+{% endblock %}

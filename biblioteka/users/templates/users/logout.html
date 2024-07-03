@@ -1,0 +1,13 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block sim %}
+    <h2 style="font-size:50px; font-family: century gothic; text-align:center; color:#2f4f4f">вы успешно вышли</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <div class="center">
+                <img class="media" src="{% static 'main/img/bhh.png' %}" alt="logo" width="200px" height="auto">
+            </div>
+            <a href="{% url 'login' %}" class="back-link" style="font-size:27px; text-align:center; font-family: century gothic; font-weight: bold">ВОЙТИ</a>
+        </small>
+    </div>
+{% endblock sim %}

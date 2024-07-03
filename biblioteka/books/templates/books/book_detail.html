@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block sim %}
+    <div class="game-detail">
+        <div class="game-cover">
+                <img class="mg" src="{{ MEDIA_URL }}{{ game.pre }}" alt="Обложка {{ game.title }}"/>
+        </div>
+        <div class="game-details">
+            {% filter upper %}
+            <h1 class="game-title">{{ game.title }}</h1>
+            {% endfilter %}
+            <p class="release-date">автор: <span class="italic">{{ game.avtor }}</span></p>
+            <p class="game-full_t">{{ game.full_t }}</p>
+            <p class="release-date">ЖАНР. НАПРАВЛЕНИЯ: <span class="italic">{{ game.idea }}</span></p>
+            <p class="release-date">ДАТА ПУБЛИКАЦИИ: <span class="italic">{{ game.data }}</span></p>
+            <form method="post" class="game-backlog-form">
+                {% csrf_token %}
+                <p class = "play_title">ВЫБРАТЬ СВИТОК:
+                    <select name="b_section">
+                        <option value="want_to_read">В ПЛАНАХ К ПРОЧТЕНИЮ</option>
+                        <option value="reading">ЧИТАЮ</option>
+                        <option value="read">НЕДОЧИТАНО(БРОШЕНО)</option>
+                        <option value="completed">ПРОЧИТАНО</option>
+                    </select>
+                    <button type="submit" style="background-color: #6dae81; color:#f8f8ff">ВНЕСТИ В СВИТОК</button>
+                </p>
+            </form>
+            <form method="post" class="game-backlog-delete-form">
+                {% csrf_token %}
+                <button type="submit" style="background-color: #6dae81; color:#f8f8ff" >СТЕРЕТЬ ИЗ СВИТКА</button>
+            </form>
+            <a href="{% url 'book_home' %}" class="back-link">ВЕРНУТЬСЯ К ПЕРГАМЕНТАМ ЗНАНИЙ</a>
+        </div>
+    </div>
+{% endblock sim %}
